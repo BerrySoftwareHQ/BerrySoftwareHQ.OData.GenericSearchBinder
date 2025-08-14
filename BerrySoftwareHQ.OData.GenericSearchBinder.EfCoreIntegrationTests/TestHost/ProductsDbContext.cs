@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace GenericSearchBinder.EfCoreIntegrationTests.TestHost;
+namespace BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests.TestHost;
 
 public class ProductsDbContext(DbContextOptions<ProductsDbContext> options)
     : DbContext(options)

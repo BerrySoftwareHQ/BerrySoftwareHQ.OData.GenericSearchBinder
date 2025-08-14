@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericSearchBinder", "GenericSearchBinder\GenericSearchBinder.csproj", "{803623CA-092B-4462-B18F-BAF75863906B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerrySoftwareHQ.OData.GenericSearchBinder", "BerrySoftwareHQ.OData.GenericSearchBinder\BerrySoftwareHQ.OData.GenericSearchBinder.csproj", "{803623CA-092B-4462-B18F-BAF75863906B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericSearchBinder.UnitTests", "GenericSearchBinder.UnitTests\GenericSearchBinder.UnitTests.csproj", "{B4127722-293D-480E-9539-B1C9730EEB82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerrySoftwareHQ.OData.GenericSearchBinder.UnitTests", "BerrySoftwareHQ.OData.GenericSearchBinder.UnitTests\BerrySoftwareHQ.OData.GenericSearchBinder.UnitTests.csproj", "{B4127722-293D-480E-9539-B1C9730EEB82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericSearchBinder.IntegrationTests", "GenericSearchBinder.IntegrationTests\GenericSearchBinder.IntegrationTests.csproj", "{E9D0AB5C-0D8C-4A64-B6E9-10F0C3E3B2F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerrySoftwareHQ.OData.GenericSearchBinder.IntegrationTests", "BerrySoftwareHQ.OData.GenericSearchBinder.IntegrationTests\BerrySoftwareHQ.OData.GenericSearchBinder.IntegrationTests.csproj", "{E9D0AB5C-0D8C-4A64-B6E9-10F0C3E3B2F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericSearchBinder.EfCoreIntegrationTests", "GenericSearchBinder.EfCoreIntegrationTests\GenericSearchBinder.EfCoreIntegrationTests.csproj", "{A6F94F21-8E8A-4F88-BC5E-5D81E2C7E4E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests", "BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests\BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests.csproj", "{A6F94F21-8E8A-4F88-BC5E-5D81E2C7E4E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

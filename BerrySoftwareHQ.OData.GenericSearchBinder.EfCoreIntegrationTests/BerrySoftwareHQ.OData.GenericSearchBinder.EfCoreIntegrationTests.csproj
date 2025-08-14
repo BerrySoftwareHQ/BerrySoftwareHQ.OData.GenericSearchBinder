@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <RootNamespace>BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +22,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="9.3.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GenericSearchBinder\GenericSearchBinder.csproj" />
+    <ProjectReference Include="..\BerrySoftwareHQ.OData.GenericSearchBinder\BerrySoftwareHQ.OData.GenericSearchBinder.csproj" />
   </ItemGroup>
 </Project>

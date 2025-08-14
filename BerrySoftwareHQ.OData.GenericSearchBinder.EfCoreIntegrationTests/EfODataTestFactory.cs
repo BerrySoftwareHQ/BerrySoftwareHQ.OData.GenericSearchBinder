@@ -1,5 +1,5 @@
 using System.Data.Common;
-using GenericSearchBinder.EfCoreIntegrationTests.TestHost;
+using BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests.TestHost;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +16,10 @@ using Microsoft.OData.ModelBuilder;
 
 namespace BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests;
 
-public sealed class EfODataTestFactory : WebApplicationFactory<ProgramStub>
+public sealed class EfODataTestFactory(Action<ProductsDbContext>? seed = null)
+    : WebApplicationFactory<ProgramStub>
 {
     private DbConnection? _connection;
-    private readonly Action<TestHost.ProductsDbContext>? _seed;
-
-    public EfODataTestFactory(Action<TestHost.ProductsDbContext>? seed = null)
-    {
-        _seed = seed;
-    }
 
     protected override IHostBuilder? CreateHostBuilder()
     {
@@ -58,7 +53,7 @@ public sealed class EfODataTestFactory : WebApplicationFactory<ProgramStub>
                 opt.Select().Filter().OrderBy().Count().Expand().SetMaxTop(100)
                    .AddRouteComponents("odata", GetEdmModel(), routeServices =>
                    {
-                       routeServices.AddSingleton<ISearchBinder, global::GenericSearchBinder.GenericSearchBinder>();
+                       routeServices.AddSingleton<ISearchBinder, GenericSearchBinder>();
                    });
             });
 
@@ -71,9 +66,9 @@ public sealed class EfODataTestFactory : WebApplicationFactory<ProgramStub>
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
 
-            if (_seed is not null)
+            if (seed is not null)
             {
-                _seed(db);
+                seed(db);
                 db.SaveChanges();
             }
             else

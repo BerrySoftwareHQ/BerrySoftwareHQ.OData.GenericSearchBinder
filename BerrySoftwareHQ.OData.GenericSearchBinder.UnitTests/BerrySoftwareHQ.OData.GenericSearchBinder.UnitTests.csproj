@@ -7,7 +7,7 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
-        <RootNamespace>GenericSearchBinder.Tests</RootNamespace>
+        <RootNamespace>BerrySoftwareHQ.OData.GenericSearchBinder.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GenericSearchBinder\GenericSearchBinder.csproj" />
+      <ProjectReference Include="..\BerrySoftwareHQ.OData.GenericSearchBinder\BerrySoftwareHQ.OData.GenericSearchBinder.csproj" />
     </ItemGroup>
 
 </Project>

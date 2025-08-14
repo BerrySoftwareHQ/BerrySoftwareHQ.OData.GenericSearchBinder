@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.OData.Query.Expressions;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OData.UriParser;
 
-namespace GenericSearchBinder.Tests;
+namespace BerrySoftwareHQ.OData.GenericSearchBinder.Tests;
 
 public class AndSearchTests
 {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.OData.Query.Expressions;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OData.UriParser;
 
-namespace GenericSearchBinder.Tests;
+namespace BerrySoftwareHQ.OData.GenericSearchBinder.Tests;
 
 // example SearchClause with OR {"Expression":{"OperatorKind":0,"Left":{"Text":"Test","TypeReference":{"IsNullable":false,"Definition":{"Name":"Boolean","Namespace":"Edm","TypeKind":1,"PrimitiveKind":2,"SchemaElementKind":1,"FullName":"Edm.Boolean"}},"Kind":24},"Right":{"Text":"TestT","TypeReference":{"IsNullable":false,"Definition":{"Name":"Boolean","Namespace":"Edm","TypeKind":1,"PrimitiveKind":2,"SchemaElementKind":1,"FullName":"Edm.Boolean"}},"Kind":24},"TypeReference":{"IsNullable":false,"Definition":{"Name":"Boolean","Namespace":"Edm","TypeKind":1,"PrimitiveKind":2,"SchemaElementKind":1,"FullName":"Edm.Boolean"}},"Kind":4}}
 // example SearchClause with single search {"Expression":{"Text":"Test","TypeReference":{"IsNullable":false,"Definition":{"Name":"Boolean","Namespace":"Edm","TypeKind":1,"PrimitiveKind":2,"SchemaElementKind":1,"FullName":"Edm.Boolean"}},"Kind":24}}

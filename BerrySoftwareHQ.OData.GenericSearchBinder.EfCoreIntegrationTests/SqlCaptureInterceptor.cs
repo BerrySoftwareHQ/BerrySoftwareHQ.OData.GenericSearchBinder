@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace GenericSearchBinder.EfCoreIntegrationTests;
+namespace BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests;
 
 public sealed class SqlCaptureInterceptor : DbCommandInterceptor
 {

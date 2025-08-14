@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GenericSearchBinder.EfCoreIntegrationTests;
+namespace BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests;
 
 [Category("Integration.EF")] 
 public class ServerSideExecutionTests

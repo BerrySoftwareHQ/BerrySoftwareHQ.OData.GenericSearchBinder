@@ -1,4 +1,4 @@
-using GenericSearchBinder.EfCoreIntegrationTests.TestHost;
+using BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests;

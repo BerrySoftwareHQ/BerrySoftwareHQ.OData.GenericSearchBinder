@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace GenericSearchBinder.EfCoreIntegrationTests;
+namespace BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests;
 
 [Category("Integration.EF")]
 public class SearchEfIntegrationTests

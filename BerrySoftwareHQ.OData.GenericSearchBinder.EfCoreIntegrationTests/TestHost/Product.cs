@@ -1,4 +1,4 @@
-namespace GenericSearchBinder.EfCoreIntegrationTests.TestHost;
+namespace BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests.TestHost;
 
 public class Product
 {
