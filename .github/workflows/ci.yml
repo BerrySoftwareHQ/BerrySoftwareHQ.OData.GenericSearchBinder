@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+    branches: ["main", "master", "develop", "feature/**"]
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: ./global.json
+      - name: Restore
+        run: dotnet restore BerrySoftwareHQ.OData.GenericSearchBinder.sln
+      - name: Build
+        run: dotnet build BerrySoftwareHQ.OData.GenericSearchBinder.sln -c Release --no-restore
+      - name: Test
+        run: dotnet test BerrySoftwareHQ.OData.GenericSearchBinder.sln -c Release --no-build --logger "trx;LogFileName=test-results.trx"
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: "**/TestResults/*.trx"

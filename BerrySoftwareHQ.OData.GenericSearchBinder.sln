@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerrySoftwareHQ.OData.GenericSearchBinder", "BerrySoftwareHQ.OData.GenericSearchBinder\BerrySoftwareHQ.OData.GenericSearchBinder.csproj", "{803623CA-092B-4462-B18F-BAF75863906B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerrySoftwareHQ.OData.GenericSearchBinder.UnitTests", "BerrySoftwareHQ.OData.GenericSearchBinder.UnitTests\BerrySoftwareHQ.OData.GenericSearchBinder.UnitTests.csproj", "{B4127722-293D-480E-9539-B1C9730EEB82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerrySoftwareHQ.OData.GenericSearchBinder.IntegrationTests", "BerrySoftwareHQ.OData.GenericSearchBinder.IntegrationTests\BerrySoftwareHQ.OData.GenericSearchBinder.IntegrationTests.csproj", "{E9D0AB5C-0D8C-4A64-B6E9-10F0C3E3B2F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests", "BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests\BerrySoftwareHQ.OData.GenericSearchBinder.EfCoreIntegrationTests.csproj", "{A6F94F21-8E8A-4F88-BC5E-5D81E2C7E4E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{803623CA-092B-4462-B18F-BAF75863906B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{803623CA-092B-4462-B18F-BAF75863906B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{803623CA-092B-4462-B18F-BAF75863906B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{803623CA-092B-4462-B18F-BAF75863906B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4127722-293D-480E-9539-B1C9730EEB82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4127722-293D-480E-9539-B1C9730EEB82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4127722-293D-480E-9539-B1C9730EEB82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4127722-293D-480E-9539-B1C9730EEB82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9D0AB5C-0D8C-4A64-B6E9-10F0C3E3B2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D0AB5C-0D8C-4A64-B6E9-10F0C3E3B2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D0AB5C-0D8C-4A64-B6E9-10F0C3E3B2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D0AB5C-0D8C-4A64-B6E9-10F0C3E3B2F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F94F21-8E8A-4F88-BC5E-5D81E2C7E4E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F94F21-8E8A-4F88-BC5E-5D81E2C7E4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F94F21-8E8A-4F88-BC5E-5D81E2C7E4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F94F21-8E8A-4F88-BC5E-5D81E2C7E4E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

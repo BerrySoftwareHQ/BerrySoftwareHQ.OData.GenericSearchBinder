@@ -1,0 +1,25 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  pack-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: ./global.json
+      - name: Restore
+        run: dotnet restore BerrySoftwareHQ.OData.GenericSearchBinder.sln
+      - name: Build
+        run: dotnet build BerrySoftwareHQ.OData.GenericSearchBinder/BerrySoftwareHQ.OData.GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true --no-restore
+      - name: Pack
+        run: dotnet pack BerrySoftwareHQ.OData.GenericSearchBinder/BerrySoftwareHQ.OData.GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true --no-build
+      - name: Push
+        run: dotnet nuget push BerrySoftwareHQ.OData.GenericSearchBinder/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
