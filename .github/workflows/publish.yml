@@ -1,0 +1,25 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  pack-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: ./global.json
+      - name: Restore
+        run: dotnet restore GenericSearchBinder.sln
+      - name: Build
+        run: dotnet build GenericSearchBinder/GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true
+      - name: Pack
+        run: dotnet pack GenericSearchBinder/GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true --no-build
+      - name: Push
+        run: dotnet nuget push GenericSearchBinder/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
