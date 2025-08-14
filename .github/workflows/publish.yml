@@ -16,10 +16,10 @@ jobs:
         with:
           global-json-file: ./global.json
       - name: Restore
-        run: dotnet restore GenericSearchBinder.sln
+        run: dotnet restore BerrySoftwareHQ.OData.GenericSearchBinder.sln
       - name: Build
-        run: dotnet build GenericSearchBinder/GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true
+        run: dotnet build BerrySoftwareHQ.OData.GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true
       - name: Pack
-        run: dotnet pack GenericSearchBinder/GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true --no-build
+        run: dotnet pack BerrySoftwareHQ.OData.GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true --no-build
       - name: Push
-        run: dotnet nuget push GenericSearchBinder/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push BerrySoftwareHQ.OData.GenericSearchBinder/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

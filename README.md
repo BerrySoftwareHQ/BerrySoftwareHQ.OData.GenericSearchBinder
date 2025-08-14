@@ -1,4 +1,4 @@
-# OData.GenericSearchBinder
+# BerrySoftwareHQ.OData.GenericSearchBinder
 
 A lightweight and robust ISearchBinder implementation for ASP.NET Core OData ($search). It builds a boolean predicate that performs a safe, case‑insensitive Contains search across an entity’s readable scalar properties.
 
@@ -18,7 +18,7 @@ Works with .NET 8 and Microsoft.AspNetCore.OData v8+.
 2) Register the binder
 
 ```csharp
-using GenericSearchBinder;
+using BerrySoftwareHQ.OData.GenericSearchBinder;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.OData.Query.Expressions;
 
