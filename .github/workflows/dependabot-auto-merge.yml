@@ -19,7 +19,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Optionally restrict auto-merge to patch and minor updates.
       - name: Enable auto-merge for Dependabot PRs (all semver)
         if: |
           steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
