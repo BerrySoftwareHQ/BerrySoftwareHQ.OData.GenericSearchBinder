@@ -190,4 +190,51 @@ public class SearchEfIntegrationTests
         var ids = value.EnumerateArray().Select(e => e.GetProperty("Id").GetInt32()).ToList();
         Assert.That(ids, Is.EquivalentTo(new[] { 1 }));
     }
+    
+    private static async Task<JsonElement> GetODataValueArrayAsync(EfODataTestFactory factory, string url)
+    {
+        var client = factory.CreateClient();
+        var response = await client.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        await using var stream = await response.Content.ReadAsStreamAsync();
+        using var doc = await JsonDocument.ParseAsync(stream);
+        return doc.RootElement.GetProperty("value").Clone();
+    }
+
+    private static List<string?> GetStrings(JsonElement value, string property)
+    {
+        return value.EnumerateArray()
+            .Select(e => e.TryGetProperty(property, out var p) ? p.GetString() : null)
+            .ToList();
+    }
+
+    [Test]
+    public async Task Search_SpecialCharacters_Hyphen_Quoted_Matches_Ef()
+    {
+        using var factory = new EfODataTestFactory(db =>
+        {
+            db.Products.Add(new TestHost.Product { Id = 900, Name = "test-with-dash", Category = "Spec", Description = "contains-hyphen" });
+        });
+
+        var value = await GetODataValueArrayAsync(factory, "/odata/Products?$search=%22test-with-dash%22");
+        var names = GetStrings(value, "Name");
+        Assert.That(names, Does.Contain("test-with-dash"));
+    }
+
+    [Test]
+    public async Task Search_SpecialCharacters_EmailLike_Quoted_Matches_Ef()
+    {
+        using var factory = new EfODataTestFactory(db =>
+        {
+            db.Products.Add(new TestHost.Product { Id = 901, Name = "email-like@example.com", Category = "Spec", Description = "also has test-with-dash" });
+        });
+
+        var value1 = await GetODataValueArrayAsync(factory, "/odata/Products?$search=%22email-like@example.com%22");
+        var names1 = GetStrings(value1, "Name");
+        Assert.That(names1, Does.Contain("email-like@example.com"));
+
+        var value2 = await GetODataValueArrayAsync(factory, "/odata/Products?$search=%22test-with-dash%22");
+        var descriptions = GetStrings(value2, "Description");
+        Assert.That(descriptions.Any(d => d != null && d.Contains("test-with-dash", StringComparison.OrdinalIgnoreCase)), Is.True);
+    }
 }
