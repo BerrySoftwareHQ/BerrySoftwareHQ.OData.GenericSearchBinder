@@ -36,10 +36,17 @@ jobs:
         with:
           global-json-file: ./global.json
 
+      - name: Restore
+        run: dotnet restore BerrySoftwareHQ.OData.GenericSearchBinder.sln
+
+      - name: Build
+        run: dotnet build BerrySoftwareHQ.OData.GenericSearchBinder.sln --configuration Release --no-restore
+
       - name: Generate NuGet package
         run: |
-          dotnet pack BerrySoftwareHQ.OData.GenericSearchBinder/ \
+          dotnet pack BerrySoftwareHQ.OData.GenericSearchBinder/BerrySoftwareHQ.OData.GenericSearchBinder.csproj \
           --configuration Release \
+          --no-build \
           -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} \
           -p:RepositoryUrl=https://github.com/BerrySoftwareHQ/BerrySoftwareHQ.OData.GenericSearchBinder \
           -o packages
