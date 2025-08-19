@@ -46,7 +46,6 @@ jobs:
         run: |
           dotnet pack BerrySoftwareHQ.OData.GenericSearchBinder/BerrySoftwareHQ.OData.GenericSearchBinder.csproj \
           --configuration Release \
-          --no-build \
           -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} \
           -p:RepositoryUrl=https://github.com/BerrySoftwareHQ/BerrySoftwareHQ.OData.GenericSearchBinder \
           -o packages
