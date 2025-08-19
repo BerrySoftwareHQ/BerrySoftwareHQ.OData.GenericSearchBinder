@@ -2,24 +2,56 @@ name: publish
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches: [main]
 
 jobs:
-  pack-and-push:
+  generate-version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v5
+
+      - name: GitHub Tag Bump
+        id: tab_bump
+        uses: anothrNick/github-tag-action@1.73.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INITIAL_VERSION: 1.0.0
+          DEFAULT_BUMP: patch
+
+    outputs:
+      new_version: ${{ steps.tab_bump.outputs.new_tag }}
+
+  package-and-publish-lib:
+    runs-on: ubuntu-latest
+    needs: generate-version
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: ./global.json
-      - name: Restore
-        run: dotnet restore BerrySoftwareHQ.OData.GenericSearchBinder.sln
-      - name: Build
-        run: dotnet build BerrySoftwareHQ.OData.GenericSearchBinder/BerrySoftwareHQ.OData.GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true --no-restore
-      - name: Pack
-        run: dotnet pack BerrySoftwareHQ.OData.GenericSearchBinder/BerrySoftwareHQ.OData.GenericSearchBinder.csproj -c Release -p:ContinuousIntegrationBuild=true --no-build
-      - name: Push
-        run: dotnet nuget push BerrySoftwareHQ.OData.GenericSearchBinder/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Generate NuGet package
+        run: |
+          dotnet pack BerrySoftwareHQ.OData.GenericSearchBinder/ \
+          --configuration Release \
+          -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} \
+          -p:RepositoryUrl=https://github.com/BerrySoftwareHQ/BerrySoftwareHQ.OData.GenericSearchBinder \
+          -o packages
+
+      - name: Publish NuGet package
+        run: dotnet nuget push packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.generate-version.outputs.new_version }}
+          name: Release ${{ needs.generate-version.outputs.new_version }}
+          generate_release_notes: true
+          files: |
+            packages/*.nupkg
