@@ -82,6 +82,26 @@ public class SingleSearchTests
     }
 
     [Test]
+    public void BindSearch_WithHyphenatedTerm_ReturnsCorrectExpression()
+    {
+        var func = GetTestFunc<OnlyOneStringTestEntity>("test-with-dash");
+
+        Assert.That(func(new OnlyOneStringTestEntity { Name = "test-with-dash" }), Is.True, "Should match exact hyphenated term");
+        Assert.That(func(new OnlyOneStringTestEntity { Name = "prefix test-with-dash suffix" }), Is.True, "Should match hyphenated term as substring");
+        Assert.That(func(new OnlyOneStringTestEntity { Name = "test with dash" }), Is.False, "Should not match when hyphens are missing");
+    }
+
+    [Test]
+    public void BindSearch_WithEmailLikeTerm_ReturnsCorrectExpression()
+    {
+        var func = GetTestFunc<OnlyOneStringTestEntity>("email-like@example.com");
+
+        Assert.That(func(new OnlyOneStringTestEntity { Name = "email-like@example.com" }), Is.True, "Should match exact email-like term");
+        Assert.That(func(new OnlyOneStringTestEntity { Name = "contact: email-like@example.com (primary)" }), Is.True, "Should match email-like term as substring");
+        Assert.That(func(new OnlyOneStringTestEntity { Name = "email_like@example_com" }), Is.False, "Should not match different separators");
+    }
+
+    [Test]
     public void BindSearch_WithEmptyTerm_ReturnsAlwaysTrueExpression()
     {
         var func = GetTestFunc<OnlyOneStringTestEntity>("");

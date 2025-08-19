@@ -181,4 +181,59 @@ public class SearchIntegrationTests
         var names = value.EnumerateArray().Select(e => e.GetProperty("Name").GetString()).ToList();
         Assert.That(names, Is.EquivalentTo(new[] { "Apple" }));
     }
+    
+    private static async Task<JsonElement> GetODataValueArrayAsync(ODataTestFactory factory, string url)
+    {
+        var client = factory.CreateClient();
+        var response = await client.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        await using var stream = await response.Content.ReadAsStreamAsync();
+        using var doc = await JsonDocument.ParseAsync(stream);
+        return doc.RootElement.GetProperty("value").Clone();
+    }
+
+    private static List<string?> GetStrings(JsonElement value, string property)
+    {
+        return value.EnumerateArray()
+            .Select(e => e.TryGetProperty(property, out var p) ? p.GetString() : null)
+            .ToList();
+    }
+
+    [Test]
+    public async Task Search_SpecialCharacters_Hyphen_Quoted_Matches_NameAndDescription()
+    {
+        // Arrange: custom factory seed with hyphenated term
+        var seed = new[]
+        {
+            new TestHost.Product { Id = 999, Name = "test-with-dash", Category = "Spec", Description = "contains-hyphen" }
+        };
+        using var factory = new ODataTestFactory(seed);
+
+        // Act - quoted hyphenated term, should match both Name and Description
+        var value = await GetODataValueArrayAsync(factory, "/odata/Products?$search=%22test-with-dash%22");
+        var names = GetStrings(value, "Name");
+
+        // Assert
+        Assert.That(names, Does.Contain("test-with-dash"));
+    }
+
+    [Test]
+    public async Task Search_SpecialCharacters_Hyphen_Quoted_Matches()
+    {
+        var seed = new[]
+        {
+            new TestHost.Product { Id = 1000, Name = "email-like@example.com", Category = "Spec", Description = "test-with-dash and underscore_case" }
+        };
+        using var factory = new ODataTestFactory(seed);
+
+        // Quoted exact hyphenated phrase inside Description
+        var value1 = await GetODataValueArrayAsync(factory, "/odata/Products?$search=%22test-with-dash%22");
+        var descriptions = GetStrings(value1, "Description");
+        Assert.That(descriptions.Any(d => d != null && d.Contains("test-with-dash", StringComparison.OrdinalIgnoreCase)), Is.True);
+
+        // Also verify email-like content with special characters works when quoted
+        var value2 = await GetODataValueArrayAsync(factory, "/odata/Products?$search=%22email-like@example.com%22");
+        var names2 = GetStrings(value2, "Name");
+        Assert.That(names2, Does.Contain("email-like@example.com"));
+    }
 }
