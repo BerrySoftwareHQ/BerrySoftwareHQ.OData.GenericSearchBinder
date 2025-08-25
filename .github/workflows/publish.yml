@@ -16,7 +16,7 @@ jobs:
 
       - name: GitHub Tag Bump
         id: tab_bump
-        uses: anothrNick/github-tag-action@1.73.0
+        uses: anothrNick/github-tag-action@1.75.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INITIAL_VERSION: 1.0.0
